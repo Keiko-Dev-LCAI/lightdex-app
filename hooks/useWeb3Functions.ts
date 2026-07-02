@@ -24,7 +24,6 @@ import { estimateContractGas, simulateContract } from "viem/actions";
 import wethAbi from "@/contracts/wethAbi";
 
 const useWeb3Functions = () => {
-  // const api = useApi();
   const chain = useCurrentChain();
   const { address } = useAccount();
   const { publicClient, walletClient } = useWeb3Clients();
