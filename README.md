@@ -26,9 +26,13 @@ Built with Next.js (App Router), TypeScript, wagmi/viem, and Reown AppKit.
   - [Contracts](#contracts)
   - [Token List](#token-list)
   - [Remote Navigation & Footer Config](#remote-navigation--footer-config)
+- [Deploying Your Own DEX](#deploying-your-own-dex)
 - [Deployment](#deployment)
 - [Security](#security)
+- [Disclaimer](#disclaimer)
+- [Trademarks & Branding](#trademarks--branding)
 - [Contributing](#contributing)
+- [Acknowledgements](#acknowledgements)
 - [License](#license)
 
 ---
@@ -206,6 +210,20 @@ Both are **optional and fail-safe**: if the URL is unset or the fetch fails, the
 
 External link targets are resolved through [`lib/nav/resolveTarget.ts`](lib/nav/resolveTarget.ts), which opens off-origin links in a new tab.
 
+## Deploying Your Own DEX
+
+This repository is the **frontend only**. To run an independent DEX you must also deploy the on-chain contracts it talks to, then point the app at your own addresses. LCAI Swap targets a standard **Uniswap V2**–compatible AMM; the ABIs in [`contracts/`](contracts) match the canonical Uniswap V2 interfaces.
+
+This project does **not** redistribute the AMM contract source. Deploy it from the official upstream repositories:
+
+1. **Factory** — deploy `UniswapV2Factory` from [Uniswap/v2-core](https://github.com/Uniswap/v2-core) (GPL-3.0), passing your `feeToSetter` address.
+2. **Wrapped native token** — deploy a WETH9-style wrapped-native ERC-20 with `deposit` / `withdraw`. Lightchain uses `WLCAI`, an OpenZeppelin ERC-20 with `ERC20Permit` (EIP-2612), which enables the gasless liquidity-removal flow.
+3. **Router** — deploy `UniswapV2Router02` from [Uniswap/v2-periphery](https://github.com/Uniswap/v2-periphery) (GPL-3.0), passing your factory and wrapped-native addresses.
+   - ⚠️ **Pair init-code hash:** `UniswapV2Library.pairFor` hard-codes the pair init-code hash. If you compile the factory yourself, set the periphery's `INIT_CODE_HASH` to your factory's actual `pairCodeHash()`, or the router will derive wrong pair addresses and swaps/liquidity will fail.
+4. **Wire it into the frontend** — set your deployed addresses in [`config/index.ts`](config/index.ts) (`factoryV2Address`, `routerV2Address`, `WETH`), define your network in [`config/chains.ts`](config/chains.ts), and update [`config/token-list.ts`](config/token-list.ts).
+
+The Uniswap V2 contracts are licensed under **GPL-3.0**; your on-chain deployment and any modifications to those contracts are governed by that license, independently of this frontend's MIT license. See [Acknowledgements](#acknowledgements).
+
 ## Deployment
 
 The app is a standard Next.js application and can be deployed to any platform that supports Next.js 15 (e.g. [Vercel](https://vercel.com), Node.js hosting, or a container).
@@ -228,6 +246,23 @@ This is financial software that interacts with users' wallets and on-chain funds
 
 If you discover a security vulnerability, please report it privately to the maintainers rather than opening a public issue.
 
+## Disclaimer
+
+LCAI Swap is free, open-source software provided **"as is", without warranty of any kind**, as set out in the [MIT License](LICENSE). It is a **non-custodial** interface — it never takes possession of your funds; all transactions are constructed client-side and signed and broadcast by your own wallet.
+
+- **No advice.** Nothing in this software or its documentation is financial, investment, legal, or tax advice, or a solicitation to buy or sell any asset.
+- **Use at your own risk.** Interacting with smart contracts and digital assets is inherently risky and may result in the **total loss of funds**. Always verify contract addresses and review each transaction before signing.
+- **Your compliance responsibility.** If you deploy, host, or operate an instance of this software, **you alone** are responsible for compliance with all applicable laws and regulations in your jurisdiction — including securities, money-transmission/money-services, sanctions, AML/KYC, tax, and consumer-protection laws.
+- **Not audited by default.** This code and the contracts it interacts with may not have been independently audited. Review them before any production use.
+
+The authors and contributors accept no liability for any loss or damage arising from the use of this software, to the maximum extent permitted by law.
+
+## Trademarks & Branding
+
+The [MIT License](LICENSE) covers the **source code only**. The names **"Lightchain", "Lightchain AI", "LCAI"**, and the associated logos and brand assets are trademarks of Lightchain Protocol and are **not** licensed for reuse.
+
+If you deploy your own instance, **replace the Lightchain branding** and do not present your deployment as the official Lightchain DEX. The only official deployment is served at **https://dex.lightchain.ai** — any other site using this code is an independent, unaffiliated instance.
+
 ## Contributing
 
 Contributions are welcome. To propose a change:
@@ -236,6 +271,16 @@ Contributions are welcome. To propose a change:
 2. Make your changes and run `pnpm lint`.
 3. Open a pull request describing the change and its motivation.
 
+## Acknowledgements
+
+LCAI Swap builds on the following open-source work, each under its own license:
+
+- [Uniswap V2](https://github.com/Uniswap/v2-core) — core & periphery AMM contracts (GPL-3.0)
+- [OpenZeppelin Contracts](https://github.com/OpenZeppelin/openzeppelin-contracts) — MIT
+- [Next.js](https://nextjs.org), [wagmi](https://wagmi.sh), [viem](https://viem.sh), [Reown AppKit](https://reown.com), [TanStack Query](https://tanstack.com/query), [Zustand](https://zustand-demo.pmnd.rs), [Tailwind CSS](https://tailwindcss.com), and [shadcn/ui](https://ui.shadcn.com) — see each project for its license.
+
 ## License
 
-Released under the [MIT License](LICENSE).
+The source code in this repository is released under the [MIT License](LICENSE).
+
+The MIT license applies to this frontend only. Third-party dependencies and the on-chain contracts this app interacts with (notably the Uniswap V2 contracts, GPL-3.0) are governed by their own licenses — see [Acknowledgements](#acknowledgements) and [Deploying Your Own DEX](#deploying-your-own-dex).
