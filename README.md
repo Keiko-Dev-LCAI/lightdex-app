@@ -1,6 +1,6 @@
-# LCAI Swap
+# Lightchain DEX
 
-**LCAI Swap** is the official decentralized exchange (DEX) frontend for the **LightChain AI** network — open-sourced so anyone can run their own instance.
+**Lightchain DEX** is the official decentralized exchange (DEX) frontend for the **LightChain AI** network, branded **LCAI Swap** in the app — open-sourced so anyone can run their own instance.
 
 It is a complete DEX interface: users connect a wallet, swap tokens, provide and withdraw liquidity, and track their positions, all executed directly against on-chain Uniswap V2–style contracts (no backend, no custody). Swaps and liquidity actions are built and signed client-side and sent straight to the router, factory, and pair contracts.
 
@@ -63,7 +63,7 @@ Built with Next.js (App Router), TypeScript, wagmi/viem, and Reown AppKit.
 
 ## How It Works
 
-LCAI Swap is a pure frontend that talks to a Uniswap V2–compatible contract suite on the LightChain AI network. There is no application server in the trade path — the browser builds transactions with [viem](https://viem.sh)/[wagmi](https://wagmi.sh) and submits them to the user's wallet for signing.
+Lightchain DEX is a pure frontend that talks to a Uniswap V2–compatible contract suite on the LightChain AI network. There is no application server in the trade path — the browser builds transactions with [viem](https://viem.sh)/[wagmi](https://wagmi.sh) and submits them to the user's wallet for signing.
 
 The ABIs the app interacts with live in [`contracts/`](contracts):
 
@@ -212,7 +212,7 @@ External link targets are resolved through [`lib/nav/resolveTarget.ts`](lib/nav/
 
 ## Deploying Your Own DEX
 
-This repository is the **frontend only**. To run an independent DEX you must also deploy the on-chain contracts it talks to, then point the app at your own addresses. LCAI Swap targets a standard **Uniswap V2**–compatible AMM; the ABIs in [`contracts/`](contracts) match the canonical Uniswap V2 interfaces.
+This repository is the **frontend only**. To run an independent DEX you must also deploy the on-chain contracts it talks to, then point the app at your own addresses. Lightchain DEX targets a standard **Uniswap V2**–compatible AMM; the ABIs in [`contracts/`](contracts) match the canonical Uniswap V2 interfaces.
 
 This project does **not** redistribute the AMM contract source. Deploy it from the official upstream repositories:
 
@@ -248,7 +248,7 @@ If you discover a security vulnerability, please report it privately to the main
 
 ## Disclaimer
 
-LCAI Swap is free, open-source software provided **"as is", without warranty of any kind**, as set out in the [MIT License](LICENSE). It is a **non-custodial** interface — it never takes possession of your funds; all transactions are constructed client-side and signed and broadcast by your own wallet.
+Lightchain DEX is free, open-source software provided **"as is", without warranty of any kind**, as set out in the [MIT License](LICENSE). It is a **non-custodial** interface — it never takes possession of your funds; all transactions are constructed client-side and signed and broadcast by your own wallet.
 
 - **No advice.** Nothing in this software or its documentation is financial, investment, legal, or tax advice, or a solicitation to buy or sell any asset.
 - **Use at your own risk.** Interacting with smart contracts and digital assets is inherently risky and may result in the **total loss of funds**. Always verify contract addresses and review each transaction before signing.
@@ -273,7 +273,7 @@ Contributions are welcome. To propose a change:
 
 ## Acknowledgements
 
-LCAI Swap builds on the following open-source work, each under its own license:
+Lightchain DEX builds on the following open-source work, each under its own license:
 
 - [Uniswap V2](https://github.com/Uniswap/v2-core) — core & periphery AMM contracts (GPL-3.0)
 - [OpenZeppelin Contracts](https://github.com/OpenZeppelin/openzeppelin-contracts) — MIT
