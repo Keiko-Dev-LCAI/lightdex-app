@@ -5,12 +5,12 @@ const config = {
   chains: [lcai] as [Chain, ...Chain[]],
 
   routerV2Address: {
-    [lcai.id]: "0x1f94c0A6Cf48D3075f9713A79f87FA4eEdAF7021",
+    [lcai.id]: "0x4e5cF7992699216c489425E18fcD76852686542D",
     [lcaiTestnet.id]: "0xBA502917c3F7233F9100f9430f4048a224A7D8DE",
   } as Record<number, `0x${string}`>,
 
   factoryV2Address: {
-    [lcai.id]: "0xBA502917c3F7233F9100f9430f4048a224A7D8DE",
+    [lcai.id]: "0xEBfA227E7E001d498543D8E31F7780bC7024465B",
     [lcaiTestnet.id]: "0xeBf97f16d843bFD9d9E6B1857B4C00d94ca7e2B2",
   } as Record<number, `0x${string}`>,
 

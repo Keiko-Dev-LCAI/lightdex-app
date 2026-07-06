@@ -18,8 +18,9 @@ import Header from "@/components/header/Header";
 import Footer from "@/components/footer/Footer2";
 
 export const metadata: Metadata = {
-  title: "LCAI SWAP",
-  description: "LCAI SWAP",
+  title: "LightDex — Community DEX on Lightchain",
+  description:
+    "Swap tokens and manage liquidity on Lightchain AI. Community DEX by KeikoDev — not affiliated with Lightchain Protocol.",
 };
 
 const inter = Inter({ subsets: ["latin"] });

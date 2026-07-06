@@ -20,6 +20,14 @@ export const tokenList: Token[] = [
     logoURI: "/images/brand/lcai.svg",
     decimals: 18,
   },
+  {
+    chainId: lcai.id,
+    symbol: "USDT",
+    name: "Tether USD",
+    address: "0xdAC17F958D2ee523a2206206994597C13D831ec7",
+    logoURI: "/images/brand/usdt.svg",
+    decimals: 6,
+  },
 
   // LCAI TESTNET
   {
@@ -36,14 +44,6 @@ export const tokenList: Token[] = [
     name: "Wrapped LightChainAI",
     address: config.WETH[lcaiTestnet.id],
     logoURI: "/images/brand/lcai.svg",
-    decimals: 18,
-  },
-  {
-    chainId: lcaiTestnet.id,
-    symbol: "USDT",
-    name: "Tether USD",
-    address: "0x1f94c0A6Cf48D3075f9713A79f87FA4eEdAF7021",
-    logoURI: "/images/brand/usdt.svg",
     decimals: 18,
   },
   {

@@ -18,10 +18,10 @@ if (!projectId) {
 
 // Set up metadata
 const metadata = {
-  name: "LCAI-SWAP",
-  description: "LCAI Swap",
-  url: "https://dex.lightchain.ai", // origin must match your domain & subdomain
-  icons: ["https://dex.lightchain.ai/images/logo/logo.svg"],
+  name: "LightDex",
+  description: "Community DEX on Lightchain AI",
+  url: "https://lightdex.win",
+  icons: ["https://lightdex.win/icon-192.png"],
 };
 
 // Create the modal

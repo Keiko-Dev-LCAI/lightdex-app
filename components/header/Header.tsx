@@ -1,44 +1,31 @@
 import React from "react";
-import Image from "next/image";
 import Link from "next/link";
 
-import logoLight from "../../public/images/logo/logo.svg";
-import logoDark from "../../public/images/logo/logo-dark.svg";
-
 import DarkSwitch from "./DarkSwitcher";
-import MobileMenu from "./MobileMenu";
-import NavList from "./NavList";
+import LightDexNav from "./LightDexNav";
 import WalletConnectButton from "../wallet-connect-button";
-import { fetchNavConfig } from "@/lib/nav/fetchNavConfig";
 
 const Header = async () => {
-  const rawMenus = await fetchNavConfig();
-
   return (
-    <>
-      <nav className="swap__navbar hidden lg:flex header-default">
-        <div className="header-wrapper mx-auto">
-          <div className="flex justify-between items-center">
-            <div className="swap__navbar-logo">
-              <Link className="swap__navbar-logolight" href="/">
-                <Image src={logoLight} width={176} height={35} alt="logo" />
-              </Link>
-              <Link className="swap__navbar-logodark" href="/">
-                <Image src={logoDark} width={176} height={35} alt="logo" />
-              </Link>
-            </div>
-            <nav className="mainmenu-nav d-none d-lg-block d-md-to-xl-block link-hover ms-md-to-xl-0">
-              <NavList rawMenus={rawMenus} />
-            </nav>
-            <div className="swap__navbar-right flex items-center">
-              <DarkSwitch />
-              <WalletConnectButton className="ml-4" />
-            </div>
+    <nav className="swap__navbar flex header-default">
+      <div className="header-wrapper mx-auto w-full px-4">
+        <div className="flex flex-wrap justify-between items-center gap-3 py-2">
+          <div className="swap__navbar-logo">
+            <Link href="/" className="text-xl font-extrabold tracking-tight">
+              <span className="text-[#00d4ff]">⚡</span>{" "}
+              <span className="text-white">LightDex</span>
+            </Link>
+          </div>
+          <nav className="mainmenu-nav d-none d-lg-block d-md-to-xl-block ms-md-to-xl-0">
+            <LightDexNav />
+          </nav>
+          <div className="swap__navbar-right flex items-center">
+            <DarkSwitch />
+            <WalletConnectButton className="ml-4" />
           </div>
         </div>
-      </nav>
-      <MobileMenu rawMenus={rawMenus} />
-    </>
+      </div>
+    </nav>
   );
 };
 
